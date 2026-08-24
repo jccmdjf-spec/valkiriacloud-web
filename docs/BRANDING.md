@@ -106,3 +106,114 @@ sobria pedida por el propietario.
 Esta TASK no modificó claims, narrativa, estructura comercial ni CTA. La
 auditoría vigente de afirmaciones sigue siendo
 [`docs/PRODUCT_SOURCE_MAP.md`](PRODUCT_SOURCE_MAP.md).
+
+---
+
+# Dirección visual Enterprise — TASK-20260824-003
+
+**Fecha:** 24 de agosto de 2026
+**Estado:** vigente. **Sustituye la paleta y el tratamiento de secciones** descritos
+más arriba (que quedan como registro histórico de la TASK-20260824-002). El
+origen del isotipo y las salvedades de marca siguen vigentes sin cambios.
+
+## Motivo
+
+El propietario revisó la versión desplegada y la percepción seguía siendo la de
+una plantilla SaaS/IA: cabecera demasiado oscura, iconos protagonistas, paleta
+todavía «theme» y falta de presencia de empresa consolidada.
+
+## Referencia primaria
+
+`rampstackco/saas-landing-theme` — el llamado **Polished Standard**: las
+convenciones que el lector ya sabe leer, de modo que nada en la página deba
+aprenderse antes de poder evaluarse. Se trasladaron sus principios, no su código
+ni su marca: fondos neutros limpios, un solo acento restringido, sombras bajo
+0.12 de alpha, radios medios, ritmo generoso, escala tipográfica con distancia
+real entre pasos y separación entre tokens, componentes y secciones.
+
+Secundarias: `hannah-wright/saas-landing-page-template` (HTML semántico con
+tokens centralizados), `themesberg/landwind` (secuencia clásica de marketing) y
+`documenso/design` (disciplina de tokens y assets de marca).
+
+Se **retiran** como guía estética `MasuRii/ModernSaaS-LandingPage-Template` y
+`launch-ui/launch-ui`: su lenguaje (glow, mesh, glass, bento por costumbre) fue
+rechazado por el propietario.
+
+## Proporción de color 80 / 15 / 5
+
+| Proporción | Rol | Valores |
+| --- | --- | --- |
+| ~80 % | Blanco y neutros muy claros | `--ground: #FFFFFF`, `--surface-muted: #F6F7F9` |
+| ~15 % | Navy para texto y controles | `--ink: #16273F`, `--ink-muted: #4C5769`, `--ink-subtle: #5C6878`, `--brand: #16273F` |
+| ~5 % | Ámbar como microdetalle | `--accent: #E09A1F` (filetes), `--accent-ink: #8A5705` (texto AA) |
+
+Los beige de la versión anterior (`#FBFAF8`, `#F4F2EE`, `#ECE9E3`) se retiran:
+varios tonos cálidos visibles se leían como efecto estético. Los neutros pasan a
+la familia fría `#E4E7EC` / `#D0D5DD` / `#98A2B3`.
+
+El navy **no** se usa para cabecera completa ni para secciones a sangre. Las
+secciones se separan con **filete de 1 px**, no con bloques de color.
+
+## Reglas duras
+
+| Regla | Valor |
+| --- | --- |
+| Iconos ordinarios | `--icon: 20px`, `--icon-sm: 17px`. Tope 24 px. Sin contenedores de icono. |
+| Excepción de tamaño | Isotipo corporativo (28 px alto) y visuales de producto. |
+| Cabecera | Fondo `--ground` blanco, 72 px, filete inferior. Sin blur, sin glass, sin glow. |
+| Secciones oscuras a sangre | 0 |
+| Degradados / `backdrop-filter` | 0 |
+| Sombras | Alpha máximo 0.10. Separan la superficie; no la hacen flotar. |
+| Radios | 6 / 10 / 14 px. Sin pills salvo estados. |
+| Contenedor | 1200 px |
+| Ritmo de sección | `clamp(52px, 7vw, 112px)` |
+| Ancho de lectura | `--measure: 66ch`; ningún párrafo supera 72ch |
+
+## Uso de superficies
+
+Las tarjetas desaparecen como recurso de composición: **0 usos de `.card`**. Una
+superficie con borde y sombra se reserva para el **visual de producto**
+(`.product`), que es un objeto independiente y sí la justifica.
+
+Para explicar capacidades se usan filas narrativas alternadas (`.row`), listas de
+puntos (`.points`), una franja de cobertura con divisores (`.coverage`), columnas
+de texto (`.trust`) y una matriz de dos columnas con filetes (`.matrix`).
+
+## Estructura de la Home
+
+1. Cabecera clara.
+2. Hero a dos columnas: eyebrow, H1, párrafo, dos CTA, y **un único** visual de producto.
+3. Franja de cobertura: cuatro áreas con divisores, sin tarjetas.
+4. Tres filas narrativas alternadas (operación, finanzas, logística).
+5. Red e infraestructura: texto, lista compacta y flujo de tres pasos con filetes.
+6. Confianza: cuatro columnas de texto con icono de 17 px.
+7. Integraciones: matriz enterprise de dos columnas.
+8. Preguntas: acordeón sobre filetes, sin decoración.
+9. CTA final **claro**, con filete ámbar y botón navy. Sin panel oscuro.
+10. Pie claro con filete superior.
+
+## Favicon
+
+`assets/img/favicon.svg` se rehízo. Diagnóstico: producción ya servía los tres
+galones, pero el navegador conservaba en caché el favicon de la TASK-001 (la «V»)
+porque el nombre de archivo nunca cambió. Dos correcciones:
+
+- **Versionado del `href`** con `?v=20260824-003`, y ruta absoluta desde `/`,
+  en `icon` y `shortcut icon`. También se versionan CSS, JS e isotipo.
+- **Legibilidad a 16 px**: el mark pasa de ocupar el 56 % al 84 % de la teja y
+  los galones se engrosan. Conserva los tres niveles, navy y ámbar. No es una
+  letra ni un símbolo inventado.
+
+## Antipatrones prohibidos en esta dirección
+
+Fondo de página oscuro · cabecera navy o negra · secciones oscuras a sangre ·
+degradados de malla · glow · glassmorphism · neón · contenedores de icono de 40,
+48 o 64 px · iconos como protagonistas · una tarjeta por párrafo · bento por
+costumbre · dashboard futurista · títulos de 80–100 px · varios tonos beige como
+efecto.
+
+## Criterio de aceptación
+
+La página debe verse profesional **impresa en escala de grises**. Si una sección
+no se siente adecuada, se corrige jerarquía, espaciado, tipografía, proporción o
+composición — nunca añadiendo color, sombra, borde, iconos o tarjetas.

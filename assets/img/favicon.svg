@@ -1,13 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Valkiria">
   <title>Valkiria</title>
-  <!-- Teja blanca: mantiene los colores reales del isotipo legibles sobre cromo
-       claro y oscuro del navegador. Los galones se engrosan respecto al isotipo
-       original solo para conservar nitidez a 16 px. -->
-  <rect width="64" height="64" rx="12" fill="#FFFFFF"/>
-  <path d="M8 14 L32 30.7 L56 14 L32 20.7 Z" fill="#1B3350"/>
-  <path d="M8 14 L32 30.7 L32 20.7 Z" fill="#2E5876"/>
-  <path d="M13.9 26.4 L32 38.9 L50.1 26.4 L32 29.9 Z" fill="#1B3350"/>
-  <path d="M13.9 26.4 L32 38.9 L32 29.9 Z" fill="#2E5876"/>
-  <path d="M19.5 38.9 L32 50 L44.5 38.9 L32 41.4 Z" fill="#DE9619"/>
-  <path d="M19.5 38.9 L32 50 L32 41.4 Z" fill="#F0AB31"/>
+  <!-- Favicon derivado de la geometría de los tres galones del isotipo.
+       Frente a la versión anterior: el mark pasa de ocupar el 56 % al 84 % de
+       la teja y los galones se engrosan, para que a 16 px sigan leyéndose como
+       tres niveles y no como una mancha. Se conservan navy y ámbar. -->
+  <rect width="64" height="64" rx="10" fill="#FFFFFF"/>
+
+  <!-- Galón superior -->
+  <path d="M3 3 L32 24 L61 3 L32 12 Z" fill="#1B3350"/>
+  <path d="M3 3 L32 24 L32 12 Z" fill="#2E5876"/>
+
+  <!-- Galón intermedio -->
+  <path d="M11 25 L32 40 L53 25 L32 29 Z" fill="#1B3350"/>
+  <path d="M11 25 L32 40 L32 29 Z" fill="#2E5876"/>
+
+  <!-- Galón inferior (ámbar) -->
+  <path d="M18 42 L32 57 L46 42 L32 46 Z" fill="#DE9619"/>
+  <path d="M18 42 L32 57 L32 46 Z" fill="#F0AB31"/>
 </svg>
