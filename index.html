@@ -2,282 +2,765 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valkiria Cloud — Controla tu red. Administra tu ISP.</title>
-<meta name="description" content="Valkiria Cloud: la plataforma para ISPs que controla la red de verdad — VLANs, firewall, BGP e IPv6 nativo — y administra clientes, facturación y soporte en un solo lugar.">
-<style>
-  :root{
-    --bg:#0b0f1a;
-    --bg2:#111827;
-    --card:#151d2e;
-    --border:#243049;
-    --text:#e5e9f2;
-    --muted:#93a0b8;
-    --accent:#38bdf8;
-    --accent2:#818cf8;
-    --ok:#34d399;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
-    line-height:1.6;
-  }
-  a{color:var(--accent);text-decoration:none}
-  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ValkiriaCloud — Plataforma ISP SaaS para operar tu proveedor de internet</title>
+<meta name="description" content="ValkiriaCloud es una plataforma ISP SaaS multiempresa: clientes, contratos, facturación y recaudo, red MikroTik y OLT, logística, instalaciones y portales para clientes y técnicos en un solo lugar.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#070b12">
+<link rel="canonical" href="https://valkiriacloud.com/">
 
-  /* NAV */
-  nav{
-    position:sticky;top:0;z-index:10;
-    background:rgba(11,15,26,.85);backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--border);
-  }
-  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem;color:var(--text)}
-  .logo svg{flex:none}
-  .nav-links{display:flex;gap:26px;font-size:.95rem}
-  .nav-links a{color:var(--muted)}
-  .nav-links a:hover{color:var(--text)}
-  .btn{
-    display:inline-block;padding:10px 22px;border-radius:8px;font-weight:600;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0b0f1a;
-  }
-  .btn:hover{filter:brightness(1.1)}
-  .btn.ghost{background:none;border:1px solid var(--border);color:var(--text)}
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ValkiriaCloud">
+<meta property="og:locale" content="es_CO">
+<meta property="og:url" content="https://valkiriacloud.com/">
+<meta property="og:title" content="ValkiriaCloud — Plataforma ISP SaaS">
+<meta property="og:description" content="Clientes, contratos, facturación y recaudo, red MikroTik y OLT, logística e instalaciones, con portales para clientes y técnicos. Operación multiempresa con permisos y trazabilidad.">
 
-  /* HERO */
-  header{
-    padding:90px 0 70px;
-    background:
-      radial-gradient(600px 300px at 20% 0%,rgba(56,189,248,.12),transparent),
-      radial-gradient(600px 300px at 80% 10%,rgba(129,140,248,.12),transparent);
-    text-align:center;
-  }
-  .tag{
-    display:inline-block;padding:6px 14px;border:1px solid var(--border);
-    border-radius:999px;color:var(--accent);font-size:.85rem;margin-bottom:22px;
-    background:rgba(56,189,248,.06);
-  }
-  h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.15;margin-bottom:18px}
-  h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sub{max-width:680px;margin:0 auto 34px;color:var(--muted);font-size:1.12rem}
-  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ValkiriaCloud — Plataforma ISP SaaS">
+<meta name="twitter:description" content="Una sola plataforma para la operación, la red, las finanzas y la logística de un proveedor de internet.">
 
-  /* SECTIONS */
-  section{padding:70px 0}
-  .sec-title{text-align:center;font-size:2rem;margin-bottom:10px}
-  .sec-sub{text-align:center;color:var(--muted);max-width:640px;margin:0 auto 46px}
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/site.css">
 
-  .grid{display:grid;gap:20px}
-  .g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-
-  .card{
-    background:var(--card);border:1px solid var(--border);border-radius:14px;
-    padding:26px;
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ValkiriaCloud",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "url": "https://valkiriacloud.com/",
+  "inLanguage": "es",
+  "description": "Plataforma ISP SaaS multiempresa para gestionar clientes, contratos, servicios, facturación y recaudo, red MikroTik y OLT, logística, instalaciones y portales para clientes y técnicos.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Valkiria Technology"
   }
-  .card h3{margin-bottom:10px;font-size:1.12rem;display:flex;align-items:center;gap:10px}
-  .card p{color:var(--muted);font-size:.95rem}
-  .ico{
-    width:38px;height:38px;border-radius:9px;flex:none;
-    display:flex;align-items:center;justify-content:center;
-    background:rgba(56,189,248,.12);color:var(--accent);font-size:1.2rem;
-  }
-
-  /* DIFERENCIADOR */
-  .diff{
-    background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  }
-  .diff-in{display:grid;gap:40px;grid-template-columns:1fr 1fr;align-items:center}
-  @media(max-width:800px){.diff-in{grid-template-columns:1fr}}
-  .diff ul{list-style:none;margin-top:18px}
-  .diff li{padding:9px 0;color:var(--muted);display:flex;gap:10px;align-items:flex-start}
-  .diff li b{color:var(--text)}
-  .check{color:var(--ok);font-weight:700}
-  .term{
-    background:#0a0e17;border:1px solid var(--border);border-radius:12px;
-    font-family:Consolas,Menlo,monospace;font-size:.82rem;color:#9fe8ff;
-    padding:20px;overflow:auto;line-height:1.7;
-  }
-  .term .p{color:#5eead4}
-  .term .c{color:#64748b}
-
-  /* MODULOS */
-  .mod .card{position:relative}
-  .soon{
-    position:absolute;top:14px;right:14px;font-size:.7rem;letter-spacing:.5px;
-    color:var(--accent2);border:1px solid var(--border);padding:3px 9px;border-radius:999px;
-  }
-  .live{color:var(--ok);border-color:rgba(52,211,153,.4)}
-
-  /* STATS */
-  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;text-align:center}
-  .stat b{font-size:2rem;display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .stat span{color:var(--muted);font-size:.9rem}
-
-  /* FOOTER */
-  footer{border-top:1px solid var(--border);padding:40px 0;color:var(--muted);font-size:.9rem}
-  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
-</style>
+}
+</script>
 </head>
 <body>
 
-<nav>
-  <div class="wrap nav-in">
-    <div class="logo">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-        <path d="M3 4l9 16L21 4h-4.5L12 13 7.5 4H3z" fill="url(#g)"/>
-        <defs><linearGradient id="g" x1="3" y1="4" x2="21" y2="20"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#818cf8"/></linearGradient></defs>
-      </svg>
-      Valkiria<span style="color:var(--accent)">Cloud</span>
-    </div>
-    <div class="nav-links">
-      <a href="#plataforma">Plataforma</a>
-      <a href="#diferencia">Por qué Valkiria</a>
-      <a href="#modulos">Módulos</a>
-      <a href="https://docs.valkiriacloud.com">Docs</a>
-    </div>
-    <a class="btn" href="https://app.valkiriacloud.com">Ingresar</a>
-  </div>
-</nav>
+<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 
-<header>
-  <div class="wrap">
-    <span class="tag">⚡ Plataforma integral para ISPs y WISPs</span>
-    <h1>Controla tu <span class="grad">red</span>.<br>Administra tu <span class="grad">ISP</span>.</h1>
-    <p class="sub">
-      Valkiria no es otro panel de facturación: es un motor que gobierna tu red real —
-      VLANs, firewall, BGP e IPv6 nativo — con la gestión de clientes integrada en el mismo lugar.
-    </p>
-    <div class="cta">
-      <a class="btn" href="https://app.valkiriacloud.com">Entrar al panel</a>
-      <a class="btn ghost" href="#plataforma">Conocer la plataforma</a>
+<!-- ====================== CABECERA ====================== -->
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="#inicio" aria-label="ValkiriaCloud, ir al inicio">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M4 5.5h3.6L12 14.4l4.4-8.9H20L12 20.5 4 5.5z" fill="#4a90ff"/>
+      </svg>
+      <span>Valkiria<span class="brand-word">Cloud</span></span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a href="#producto">Producto</a></li>
+        <li><a href="#plataforma">Plataforma</a></li>
+        <li><a href="#red">Red</a></li>
+        <li><a href="#confianza">Confianza</a></li>
+        <li><a href="#integraciones">Integraciones</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="link-login" href="https://isp.valkiriacloud.com">Ingresar</a>
+      <a class="btn btn--primary btn--sm" href="#demo">Solicitar demostración</a>
     </div>
+
+    <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú de navegación">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false">
+        <path d="M4 7h16M4 12h16M4 17h16"/>
+      </svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
   </div>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Navegación móvil" hidden>
+    <ul>
+      <li><a href="#producto">Producto</a></li>
+      <li><a href="#plataforma">Plataforma</a></li>
+      <li><a href="#red">Red</a></li>
+      <li><a href="#confianza">Confianza</a></li>
+      <li><a href="#integraciones">Integraciones</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+    </ul>
+    <div class="mobile-actions">
+      <a class="btn btn--primary" href="#demo">Solicitar demostración</a>
+      <a class="btn btn--ghost" href="https://isp.valkiriacloud.com">Ingresar a la plataforma</a>
+    </div>
+  </nav>
 </header>
 
-<section id="plataforma">
-  <div class="wrap">
-    <h2 class="sec-title">Una sola plataforma, toda tu operación</h2>
-    <p class="sec-sub">Del núcleo de la red al bolsillo del cliente: cada pieza de tu ISP, conectada.</p>
-    <div class="grid g3">
-      <div class="card">
-        <h3><span class="ico">🖧</span>Red bajo control real</h3>
-        <p>Gestión de VLANs, segmentos de clientes, NAT y firewall nftables directamente a nivel del sistema — no solo tickets RADIUS.</p>
-      </div>
-      <div class="card">
-        <h3><span class="ico">🌐</span>IPv6 nativo</h3>
-        <p>Direccionamiento IPv6 de tu propio bloque, gestionado de forma estática y predecible para cada cliente y cada nodo.</p>
-      </div>
-      <div class="card">
-        <h3><span class="ico">🔀</span>BGP y multihoming</h3>
-        <p>Tu ISP con presencia propia en internet: anuncios BGP, múltiples salidas y control del tráfico de borde.</p>
-      </div>
-      <div class="card">
-        <h3><span class="ico">👥</span>Clientes y planes</h3>
-        <p>Alta, suspensión y control de ancho de banda de cada cliente, sincronizado con la red en tiempo real.</p>
-      </div>
-      <div class="card">
-        <h3><span class="ico">🧾</span>Facturación y cobros</h3>
-        <p>Facturas, cortes automáticos por mora y reconexión inmediata al registrar el pago.</p>
-      </div>
-      <div class="card">
-        <h3><span class="ico">🛠️</span>Soporte e instalaciones</h3>
-        <p>Tickets, órdenes de instalación y contratos digitales — con portal para clientes y para técnicos.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<main id="contenido">
 
-<section class="diff" id="diferencia">
-  <div class="wrap diff-in">
-    <div>
-      <h2 style="font-size:1.9rem;margin-bottom:8px">La diferencia Valkiria</h2>
-      <p style="color:var(--muted)">Las plataformas tradicionales para ISP son "facturación primero, red después". Valkiria nació al revés: <b style="color:var(--text)">primero domina la red, luego la administra</b>.</p>
-      <ul>
-        <li><span class="check">✓</span><span><b>Motor de red a nivel de kernel</b> — el panel no le "pide" cambios al router: los ejecuta en el sistema.</span></li>
-        <li><span class="check">✓</span><span><b>Producción real</b> — operando una red viva con cientos de clientes, no un demo de laboratorio.</span></li>
-        <li><span class="check">✓</span><span><b>Actualizaciones sin riesgo</b> — el código viaja, tus datos nunca: cada nodo conserva sus clientes y su configuración.</span></li>
-        <li><span class="check">✓</span><span><b>Hecho por un ISP, para ISPs</b> — cada función existe porque una red real la necesitó.</span></li>
-      </ul>
-    </div>
-    <div class="term">
-      <div><span class="p">valkiria&gt;</span> estado del nodo</div>
-      <div>NODO-CALI ......... <span style="color:#34d399">ACTIVO</span></div>
-      <div>Clientes en línea .. 105</div>
-      <div>VLANs .............. 420, 400 <span class="c"># núcleo + gestión</span></div>
-      <div>IPv6 ............... nativo /32 <span class="c"># bloque propio</span></div>
-      <div>BGP ................ 2 sesiones <span style="color:#34d399">ESTABLECIDAS</span></div>
-      <div>Firewall ........... nftables <span style="color:#34d399">OK</span></div>
-      <div>&nbsp;</div>
-      <div><span class="p">valkiria&gt;</span> actualizar nodo</div>
-      <div>Versión nueva encontrada → aplicando<span class="c"> (los datos no se tocan)</span></div>
-      <div>Actualización completada <span style="color:#34d399">✓</span></div>
-    </div>
-  </div>
-</section>
+  <!-- ====================== HERO ====================== -->
+  <section class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Plataforma ISP SaaS</span>
+        <h1>Toda la operación de tu ISP en <em>una sola plataforma</em></h1>
+        <p class="hero-lead">
+          ValkiriaCloud reúne lo que hoy vive repartido entre planillas, el panel del router y
+          el chat del equipo: clientes y contratos, facturación y recaudo, la red, la logística
+          y el trabajo en campo. Pensada para proveedores de internet que necesitan operar con
+          orden, permisos y trazabilidad.
+        </p>
 
-<section class="mod" id="modulos">
-  <div class="wrap">
-    <h2 class="sec-title">El ecosistema Valkiria</h2>
-    <p class="sec-sub">Módulos que crecen contigo: empieza por el núcleo y suma piezas cuando tu operación las pida.</p>
-    <div class="grid g3">
-      <div class="card">
-        <span class="soon live">EN PRODUCCIÓN</span>
-        <h3><span class="ico">⚙️</span>Valkiria Core</h3>
-        <p>El motor de red que corre en cada nodo: VLANs, firewall, ancho de banda, IPv6 y BGP.</p>
+        <div class="hero-actions">
+          <a class="btn btn--primary" href="#demo">
+            Solicitar demostración
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="#producto">Conocer la plataforma</a>
+        </div>
+
+        <ul class="hero-facts">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Operación multiempresa con zonas y permisos</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Integración con MikroTik RouterOS y OLT ZTE</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Portales para clientes y para técnicos</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg>
+            <span>Facturación, recaudo y cortes por mora</span>
+          </li>
+        </ul>
       </div>
-      <div class="card">
-        <span class="soon live">EN PRODUCCIÓN</span>
-        <h3><span class="ico">☁️</span>Valkiria Cloud</h3>
-        <p>El panel central: administra todos tus nodos, clientes y planes desde un solo lugar.</p>
-      </div>
-      <div class="card">
-        <span class="soon">PRÓXIMAMENTE</span>
-        <h3><span class="ico">💳</span>Valkiria Pay</h3>
-        <p>Facturación electrónica, pasarelas de pago y recaudo automatizado.</p>
-      </div>
-      <div class="card">
-        <span class="soon">PRÓXIMAMENTE</span>
-        <h3><span class="ico">🤝</span>Valkiria Clientes</h3>
-        <p>CRM, tickets de soporte y contratos digitales con firma en línea.</p>
-      </div>
-      <div class="card">
-        <span class="soon">PRÓXIMAMENTE</span>
-        <h3><span class="ico">📱</span>Valkiria App</h3>
-        <p>La app para tu cliente final: facturas, pagos, soporte y estado del servicio.</p>
-      </div>
-      <div class="card">
-        <span class="soon">PRÓXIMAMENTE</span>
-        <h3><span class="ico">🚐</span>Valkiria Field</h3>
-        <p>Órdenes de trabajo y rutas para tus técnicos de instalación y mantenimiento.</p>
+
+      <!-- Composición ilustrativa de interfaz -->
+      <div>
+        <div class="mock">
+          <div class="mock-bar">
+            <div class="mock-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            <p class="mock-url">isp.valkiriacloud.com</p>
+          </div>
+          <div class="mock-body">
+            <ul class="mock-side" aria-hidden="true">
+              <li class="mock-side-label">Operación</li>
+              <li class="is-active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 19v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                Clientes
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6"/></svg>
+                Facturación
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 8h.01M7 17h.01"/></svg>
+                Red
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg>
+                Logística
+              </li>
+              <li class="mock-side-label">Campo</li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/></svg>
+                Instalaciones
+              </li>
+            </ul>
+
+            <div class="mock-main">
+              <div class="mock-context">
+                <span class="mock-chip mock-chip--accent">Empresa activa</span>
+                <span class="mock-chip">Zona: Norte</span>
+                <span class="mock-chip">Rol: Administrador</span>
+              </div>
+              <p class="mock-title">Servicios del mes</p>
+              <div class="mock-table">
+                <div class="mock-row mock-row--head">
+                  <span>Servicio</span>
+                  <span>Plan</span>
+                  <span>Estado</span>
+                </div>
+                <div class="mock-row">
+                  <span class="mock-primary">Cliente A<span class="mock-sub">PPPoE · Nodo norte</span></span>
+                  <span>Plan residencial</span>
+                  <span class="status status--ok">Activo</span>
+                </div>
+                <div class="mock-row">
+                  <span class="mock-primary">Cliente B<span class="mock-sub">PPPoE · Nodo norte</span></span>
+                  <span>Plan residencial</span>
+                  <span class="status status--warn">En mora</span>
+                </div>
+                <div class="mock-row">
+                  <span class="mock-primary">Cliente C<span class="mock-sub">Fibra · OLT sur</span></span>
+                  <span>Plan empresarial</span>
+                  <span class="status status--ok">Activo</span>
+                </div>
+                <div class="mock-row">
+                  <span class="mock-primary">Cliente D<span class="mock-sub">PPPoE · Nodo sur</span></span>
+                  <span>Plan residencial</span>
+                  <span class="status status--idle">Suspendido</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="mock-caption">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+          <span>Composición ilustrativa de la interfaz. No representa datos reales de clientes.</span>
+        </p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat"><b>105+</b><span>clientes en producción</span></div>
-      <div class="stat"><b>24/7</b><span>red monitoreada</span></div>
-      <div class="stat"><b>IPv6</b><span>nativo de fábrica</span></div>
-      <div class="stat"><b>BGP</b><span>borde propio</span></div>
+  <!-- ====================== PILARES ====================== -->
+  <section class="section section--soft" id="producto">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Qué cubre</span>
+        <h2>Cuatro frentes que hoy no se hablan entre sí</h2>
+        <p>
+          Un ISP no falla por falta de herramientas, sino porque cada área usa la suya.
+          ValkiriaCloud las junta sobre los mismos datos: un cliente, un servicio, una zona,
+          un responsable.
+        </p>
+      </div>
+
+      <div class="pillars">
+        <article class="card pillar">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 20v-2a4 4 0 0 0-3-3.87"/></svg>
+          </span>
+          <h3>Operación ISP</h3>
+          <p>
+            El expediente completo del cliente: sus datos, sus contratos firmados, los
+            servicios que tiene contratados y el historial de lo que ha pasado con ellos.
+          </p>
+          <ul class="pillar-list">
+            <li>Clientes</li>
+            <li>Servicios y planes</li>
+            <li>Contratos digitales</li>
+            <li>Tickets de soporte</li>
+            <li>Portales</li>
+          </ul>
+        </article>
+
+        <article class="card pillar">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7.5h.01M7 17h.01"/></svg>
+          </span>
+          <h3>Red e infraestructura</h3>
+          <p>
+            La red deja de ser un mundo aparte: los equipos, el direccionamiento IP y las
+            zonas viven junto al cliente que los usa, no en una hoja de cálculo separada.
+          </p>
+          <ul class="pillar-list">
+            <li>MikroTik RouterOS</li>
+            <li>OLT ZTE</li>
+            <li>RADIUS</li>
+            <li>Nodos Valkiria Core</li>
+            <li>IP y zonas</li>
+          </ul>
+        </article>
+
+        <article class="card pillar">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>
+          </span>
+          <h3>Finanzas y recaudo</h3>
+          <p>
+            Del servicio facturable al pago aplicado: facturación por período, acuerdos de
+            pago, comprobantes, cortes por mora y cierre mensual con su respaldo.
+          </p>
+          <ul class="pillar-list">
+            <li>Facturación</li>
+            <li>Pagos y acuerdos</li>
+            <li>Cortes por mora</li>
+            <li>Cierres mensuales</li>
+            <li>Gastos y reportes</li>
+          </ul>
+        </article>
+
+        <article class="card pillar">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg>
+          </span>
+          <h3>Logística y operación de campo</h3>
+          <p>
+            Lo que sale de bodega llega a un cliente y queda registrado: equipos por serial,
+            custodia del técnico, órdenes de instalación y mantenimientos programados.
+          </p>
+          <ul class="pillar-list">
+            <li>Bodegas e inventario</li>
+            <li>Seriales y custodias</li>
+            <li>Instalaciones</li>
+            <li>Mantenimientos</li>
+            <li>Portal del técnico</li>
+          </ul>
+        </article>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <div class="wrap foot">
-    <div>© 2026 Valkiria Cloud · Hecho en Colombia 🇨🇴</div>
-    <div>
-      <a href="https://app.valkiriacloud.com">Panel</a> ·
-      <a href="https://docs.valkiriacloud.com">Documentación</a> ·
-      <a href="mailto:info@ultranetcolombia.com">Contacto</a>
+  <!-- ====================== SHOWCASE DE PRODUCTO ====================== -->
+  <section class="section" id="plataforma">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Cómo se ve</span>
+        <h2>Superficies pensadas para operar, no para presumir</h2>
+        <p>
+          Cada pantalla conserva el contexto de trabajo — empresa, zona, permisos y filtros —
+          para que la siguiente acción sea evidente.
+        </p>
+      </div>
+
+      <!-- Fila 1 -->
+      <div class="feature-row">
+        <div class="feature-copy">
+          <h3>Clientes, servicios y contratos</h3>
+          <p>
+            El cliente es la unidad de trabajo. Desde su ficha se ve qué tiene contratado, en
+            qué estado está cada servicio y qué se ha firmado, sin saltar entre sistemas.
+          </p>
+          <ul class="feature-points">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Alta, suspensión, reactivación y baja de servicios con historial conservado.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Contratos digitales con firma en línea y documento PDF asociado.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Tickets de soporte y portal donde el cliente consulta su propio servicio.</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="mock">
+            <div class="mock-bar">
+              <div class="mock-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <p class="mock-url">Ficha de cliente</p>
+            </div>
+            <div class="mock-main">
+              <div class="mock-context">
+                <span class="mock-chip mock-chip--accent">Cliente</span>
+                <span class="mock-chip">Zona: Norte</span>
+                <span class="mock-chip">2 servicios</span>
+              </div>
+              <p class="mock-title">Servicios contratados</p>
+              <div class="mock-table">
+                <div class="mock-row mock-row--head"><span>Servicio</span><span>Tecnología</span><span>Estado</span></div>
+                <div class="mock-row"><span class="mock-primary">Internet hogar<span class="mock-sub">Plan residencial</span></span><span>PPPoE</span><span class="status status--ok">Activo</span></div>
+                <div class="mock-row"><span class="mock-primary">Televisión<span class="mock-sub">Servicio adicional</span></span><span>Nuplin</span><span class="status status--ok">Activo</span></div>
+              </div>
+              <p class="mock-title" style="margin-top:16px">Contratos</p>
+              <div class="mock-table">
+                <div class="mock-row mock-row--head"><span>Documento</span><span>Tipo</span><span>Estado</span></div>
+                <div class="mock-row"><span class="mock-primary">Contrato de servicio<span class="mock-sub">Firma en línea</span></span><span>PDF</span><span class="status status--ok">Firmado</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="mock-caption">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+            <span>Composición ilustrativa. No representa datos reales de clientes.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Fila 2 -->
+      <div class="feature-row feature-row--flip">
+        <div class="feature-copy">
+          <h3>Facturación y recaudo</h3>
+          <p>
+            El ciclo de cobro completo, incluido lo que suele quedar por fuera: los acuerdos
+            de pago, los comprobantes que llegan por otro canal y el cierre del mes.
+          </p>
+          <ul class="feature-points">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Facturación por período con detalle por servicio y documento descargable.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Pagos, acuerdos de pago con cuotas y comprobantes con revisión administrativa.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Perfiles de corte por mora y reactivación al registrar el pago.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Cierres mensuales, gastos y reportes para revisar el período completo.</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="mock">
+            <div class="mock-bar">
+              <div class="mock-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <p class="mock-url">Facturación del período</p>
+            </div>
+            <div class="mock-main">
+              <div class="mock-context">
+                <span class="mock-chip mock-chip--accent">Período abierto</span>
+                <span class="mock-chip">Filtro: en mora</span>
+                <span class="mock-chip">Zona: todas</span>
+              </div>
+              <p class="mock-title">Documentos de cobro</p>
+              <div class="mock-table">
+                <div class="mock-row mock-row--head"><span>Documento</span><span>Origen</span><span>Estado</span></div>
+                <div class="mock-row"><span class="mock-primary">Factura del período<span class="mock-sub">Cliente A</span></span><span>Automática</span><span class="status status--ok">Pagada</span></div>
+                <div class="mock-row"><span class="mock-primary">Factura del período<span class="mock-sub">Cliente B</span></span><span>Automática</span><span class="status status--warn">En mora</span></div>
+                <div class="mock-row"><span class="mock-primary">Acuerdo de pago<span class="mock-sub">Cliente B · cuotas</span></span><span>Manual</span><span class="status status--ok">Vigente</span></div>
+                <div class="mock-row"><span class="mock-primary">Comprobante recibido<span class="mock-sub">Cliente C</span></span><span>Portal</span><span class="status status--idle">Por revisar</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="mock-caption">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+            <span>Composición ilustrativa. Sin importes ni datos reales.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Fila 3 -->
+      <div class="feature-row">
+        <div class="feature-copy">
+          <h3>Logística y trabajo en campo</h3>
+          <p>
+            El equipo que sale de bodega no se pierde de vista: queda asociado a un serial, a
+            un responsable y, finalmente, al cliente donde se instaló.
+          </p>
+          <ul class="feature-points">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Bodegas, inventario, movimientos, lotes y catálogos por empresa y zona.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Seriales con custodia asignada y auditoría de lo que se movió.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Instalaciones con calendario e importación, y mantenimientos con seguimiento.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span>Portal del técnico pensado para usarse desde el celular en la calle.</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="mock">
+            <div class="mock-bar">
+              <div class="mock-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <p class="mock-url">Portal del técnico</p>
+            </div>
+            <div class="mock-main">
+              <div class="mock-context">
+                <span class="mock-chip mock-chip--accent">Mis órdenes</span>
+                <span class="mock-chip">Zona: Norte</span>
+              </div>
+              <p class="mock-title">Agenda del día</p>
+              <div class="mock-table">
+                <div class="mock-row mock-row--head"><span>Orden</span><span>Tipo</span><span>Estado</span></div>
+                <div class="mock-row"><span class="mock-primary">Instalación<span class="mock-sub">Cliente nuevo · zona norte</span></span><span>Instalación</span><span class="status status--ok">Asignada</span></div>
+                <div class="mock-row"><span class="mock-primary">Revisión de enlace<span class="mock-sub">Cliente existente</span></span><span>Mantenimiento</span><span class="status status--warn">En proceso</span></div>
+                <div class="mock-row"><span class="mock-primary">Retiro de equipo<span class="mock-sub">Serial en custodia</span></span><span>Logística</span><span class="status status--idle">Pendiente</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="mock-caption">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+            <span>Composición ilustrativa. No representa órdenes ni personas reales.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== DIFERENCIADOR TÉCNICO ====================== -->
+  <section class="section section--soft" id="red">
+    <div class="container">
+      <div class="tech-grid">
+        <div>
+          <span class="eyebrow">Diferenciador</span>
+          <h2>La red y la administración, sobre el mismo dato</h2>
+          <p style="color:var(--muted);margin-top:14px">
+            En la mayoría de operaciones, el estado comercial de un cliente vive en un sistema
+            y el estado técnico en otro. Cuando dejan de coincidir, alguien reconecta a mano un
+            servicio que no pagó, o corta uno que sí.
+          </p>
+          <p style="color:var(--muted);margin-top:12px">
+            ValkiriaCloud parte de que el servicio es uno solo: el mismo registro que se factura
+            es el que se sincroniza con el equipo de red.
+          </p>
+          <ul class="feature-points" style="margin-top:24px">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span><strong>MikroTik RouterOS</strong> — sincronización de servicios, acciones sobre el equipo y registro de lo aplicado.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span><strong>OLT ZTE</strong> — conexión con la planta de fibra para la operación de servicios ópticos.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span><strong>RADIUS</strong> y direccionamiento IP por servicio, incluido el bloque IPv6 en accesos PPPoE.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6L9 17l-5-5"/></svg><span><strong>Nodos Valkiria Core</strong> — nodos propios que se vinculan con un token de un solo uso y consultan su estado por heartbeat.</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="font-size:var(--fs-sm);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px">Cómo llega un cambio a la red</h3>
+          <div class="flow">
+            <article class="flow-step">
+              <span class="flow-num" aria-hidden="true">1</span>
+              <h4>La plataforma declara</h4>
+              <p>Un cambio administrativo — alta, suspensión, reactivación o baja — actualiza el estado deseado del servicio.</p>
+            </article>
+            <article class="flow-step">
+              <span class="flow-num" aria-hidden="true">2</span>
+              <h4>El nodo consulta</h4>
+              <p>Cada nodo se autentica con sus propias credenciales y pide las órdenes que le corresponden, solo las de su empresa.</p>
+            </article>
+            <article class="flow-step">
+              <span class="flow-num" aria-hidden="true">3</span>
+              <h4>El nodo aplica e informa</h4>
+              <p>El nodo aplica la declaración según su runtime y reporta el avance en los siguientes contactos.</p>
+            </article>
+          </div>
+          <p class="note" style="margin-top:18px">
+            La plataforma conserva la fuente declarativa; no ejecuta comandos por su cuenta sobre
+            un equipo que no le corresponde. Las rutas de acción de un fabricante rechazan un
+            servicio que pertenece a otro destino técnico.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== CONFIANZA / MULTIEMPRESA ====================== -->
+  <section class="section" id="confianza">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">Multiempresa</span>
+        <h2>Pensada para operar varias empresas sin mezclarlas</h2>
+        <p>
+          Si administras más de una razón social, más de una marca o zonas con equipos
+          distintos, el aislamiento no es un extra: es la condición para poder trabajar.
+        </p>
+      </div>
+
+      <div class="trust-grid">
+        <article class="card trust-item">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 4.5-3.2 7.9-8 9-4.8-1.1-8-4.5-8-9V7l8-4z"/></svg>
+          </span>
+          <h3>Aislamiento por empresa</h3>
+          <p>Cada empresa trabaja sobre sus propios clientes, servicios, documentos y equipos. El contexto activo acompaña a la sesión.</p>
+        </article>
+
+        <article class="card trust-item">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.3 7-11a7 7 0 1 0-14 0c0 5.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          </span>
+          <h3>Alcance por zona</h3>
+          <p>Un responsable de zona ve y opera lo de sus zonas asignadas. El alcance geográfico es parte del permiso, no un filtro opcional.</p>
+        </article>
+
+        <article class="card trust-item">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          </span>
+          <h3>Roles y permisos</h3>
+          <p>Los roles definen qué se puede hacer; la empresa y la zona definen dónde. Las excepciones se administran como excepciones.</p>
+        </article>
+
+        <article class="card trust-item">
+          <span class="icon-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 12h16M4 19h10"/><circle cx="18.5" cy="19" r="2.5"/></svg>
+          </span>
+          <h3>Trazabilidad</h3>
+          <p>Las acciones sensibles dejan registro y pueden exportarse. Ante una diferencia, la conversación empieza por la evidencia.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== INTEGRACIONES ====================== -->
+  <section class="section section--soft" id="integraciones">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Integraciones</span>
+        <h2>Se conecta con lo que ya tienes montado</h2>
+        <p>
+          Estas son las integraciones presentes en la plataforma. Su disponibilidad y su
+          alcance se configuran por empresa y se revisan contigo antes de activarlas.
+        </p>
+      </div>
+
+      <div class="integrations">
+        <div class="integration">
+          <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7.5h.01M7 17h.01"/></svg></span>
+          <span><b>MikroTik RouterOS</b><span>Equipos de red</span></span>
+        </div>
+        <div class="integration">
+          <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></span>
+          <span><b>OLT ZTE</b><span>Planta de fibra</span></span>
+        </div>
+        <div class="integration">
+          <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span>
+          <span><b>RADIUS</b><span>Autenticación de acceso</span></span>
+        </div>
+        <div class="integration">
+          <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l7-5 7 5v8l-7 5-7-5z"/></svg></span>
+          <span><b>Nodos Valkiria Core</b><span>Nodos propios</span></span>
+        </div>
+        <div class="integration">
+          <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3.2-6.9"/><path d="M8 12l3 3 5-6"/></svg></span>
+          <span><b>Wispro</b><span>Importación de recaudo</span></span>
+        </div>
+        <div class="integration">
+          <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="13" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span>
+          <span><b>Nuplin</b><span>Servicio de televisión</span></span>
+        </div>
+        <div class="integration">
+          <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 20.5l1.7-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+          <span><b>WhatsApp</b><span>Notificaciones vía UltraMsg</span></span>
+        </div>
+        <div class="integration">
+          <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+          <span><b>Correo electrónico</b><span>Envíos por SMTP</span></span>
+        </div>
+        <div class="integration">
+          <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+          <span><b>Pasarelas de pago</b><span>ComboPay, OnePay, MercadoPago, PayU</span></span>
+        </div>
+        <div class="integration">
+          <span class="icon-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v5h5"/><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-5z"/><path d="M8 13h8M8 17h5"/></svg></span>
+          <span><b>Documentos PDF</b><span>Contratos, facturas y reportes</span></span>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top:20px;max-width:70ch">
+        No publicamos estados comerciales por módulo ni fechas de disponibilidad. Si una
+        integración es determinante para tu operación, la revisamos en la demostración y te
+        decimos con claridad qué cubre hoy.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================== PREGUNTAS ====================== -->
+  <section class="section" id="preguntas">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="eyebrow">Preguntas</span>
+        <h2>Lo que suelen preguntarnos</h2>
+      </div>
+
+      <div class="faq">
+        <details class="faq-item">
+          <summary>¿Qué es exactamente ValkiriaCloud?</summary>
+          <div class="faq-answer">
+            <p>Una plataforma web para administrar un proveedor de internet: clientes, contratos y servicios, facturación y recaudo, la red, la logística, las instalaciones y los portales de clientes y técnicos. Se usa desde el navegador y es multiempresa.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Sirve si administro más de una empresa o marca?</summary>
+          <div class="faq-answer">
+            <p>Sí. El aislamiento por empresa forma parte del diseño de la plataforma, no es una configuración añadida. Cada empresa conserva sus clientes, sus documentos y sus equipos, y los usuarios trabajan dentro del alcance de empresa y zona que tengan asignado.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Con qué equipos de red se integra?</summary>
+          <div class="faq-answer">
+            <p>Con MikroTik RouterOS, con OLT ZTE, con RADIUS para la autenticación de accesos y con nodos propios Valkiria Core. El direccionamiento IP y las zonas de red también se administran dentro de la plataforma.</p>
+            <p>No publicamos capacidades de enrutamiento de borde ni de firewall de sistema, porque no forman parte de lo que la plataforma hace hoy.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Cómo funciona el cobro a los clientes?</summary>
+          <div class="faq-answer">
+            <p>La plataforma factura por período sobre los servicios facturables, registra pagos y comprobantes, permite acuerdos de pago con cuotas y aplica cortes por mora según perfiles configurables. También importa recaudo desde Wispro y permite configurar pasarelas de pago por empresa.</p>
+            <p>Las acciones que mueven dinero requieren confirmación y quedan registradas.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Mis técnicos y mis clientes tienen acceso?</summary>
+          <div class="faq-answer">
+            <p>Sí, con portales separados. El portal del técnico es una interfaz web pensada para el celular, con las órdenes que le corresponden. El portal de clientes es público por empresa y le permite al suscriptor consultar su servicio y su facturación.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Cómo se controla quién puede hacer qué?</summary>
+          <div class="faq-answer">
+            <p>Con roles y permisos por acción, más un alcance definido por empresa y por zona. Existen roles como superadministrador, administrador de empresa y administrador de zonas. Las acciones sensibles quedan registradas y ese registro puede exportarse.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Avisa a los clientes automáticamente?</summary>
+          <div class="faq-answer">
+            <p>La plataforma envía notificaciones por WhatsApp y por correo con plantillas configurables, y permite trabajarlas por lotes. El envío real depende de las credenciales que cada empresa configure.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Puedo migrar mi operación actual?</summary>
+          <div class="faq-answer">
+            <p>Existen mecanismos de importación para clientes, instalaciones, mantenimientos y recaudo externo. El alcance de una migración concreta depende de cómo tengas hoy la información, y es una de las primeras cosas que revisamos en la demostración.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Cómo empiezo?</summary>
+          <div class="faq-answer">
+            <p>Solicitando una demostración. La sesión se hace sobre tu operación real: qué tienes montado, cuántas empresas y zonas manejas, con qué equipos trabajas y cómo cobras hoy. A partir de ahí definimos alcance y condiciones.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== CTA FINAL ====================== -->
+  <section class="section" id="demo">
+    <div class="container">
+      <div class="cta-final">
+        <h2>Lleva la operación de tu ISP a una sola plataforma</h2>
+        <p>
+          Cuéntanos cómo operas hoy y te mostramos ValkiriaCloud sobre tu propio caso:
+          tus zonas, tus equipos, tu forma de cobrar.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn--primary" href="mailto:info@ultranetcolombia.com?subject=Solicitud%20de%20demostraci%C3%B3n%20de%20ValkiriaCloud">
+            Solicitar demostración
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="https://isp.valkiriacloud.com">Ingresar a la plataforma</a>
+        </div>
+        <p class="note">Escríbenos a <a href="mailto:info@ultranetcolombia.com">info@ultranetcolombia.com</a> y coordinamos una sesión.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ====================== PIE ====================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#inicio">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M4 5.5h3.6L12 14.4l4.4-8.9H20L12 20.5 4 5.5z" fill="#4a90ff"/>
+          </svg>
+          <span>Valkiria<span class="brand-word">Cloud</span></span>
+        </a>
+        <p>
+          Plataforma ISP SaaS para la operación, la red, las finanzas y la logística de un
+          proveedor de internet. Un producto de Valkiria Technology.
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Enlaces del producto">
+        <h3>Producto</h3>
+        <ul>
+          <li><a href="#producto">Qué cubre</a></li>
+          <li><a href="#plataforma">Plataforma</a></li>
+          <li><a href="#red">Red e infraestructura</a></li>
+          <li><a href="#integraciones">Integraciones</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-col" aria-label="Enlaces de contacto">
+        <h3>Contacto</h3>
+        <ul>
+          <li><a href="#demo">Solicitar demostración</a></li>
+          <li><a href="#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="mailto:info@ultranetcolombia.com">Escribir un correo</a></li>
+          <li><a href="https://isp.valkiriacloud.com">Ingresar a la plataforma</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span data-year>2026</span> Valkiria Technology &middot; ValkiriaCloud &mdash; Plataforma ISP SaaS</p>
+      <p>Hecho en Colombia</p>
     </div>
   </div>
 </footer>
 
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

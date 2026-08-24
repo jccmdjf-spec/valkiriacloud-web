@@ -19,11 +19,34 @@ HTTPS está pendiente de corrección porque el certificado actual no coincide co
 
 ## Arquitectura actual
 
-La web es actualmente una landing page estática servida directamente por Nginx.
+La web es una landing page estática servida directamente por Nginx. No hay
+build step, package manager ni dependencias externas: se sirve tal cual.
 
-Archivo productivo principal:
+Estructura del sitio:
 
-/var/www/valkiria/index.html
+```
+index.html
+assets/
+  css/site.css
+  js/site.js
+  img/favicon.svg
+```
+
+Raíz productiva:
+
+/var/www/valkiria/
+
+Al desplegar hay que copiar `index.html` **y** el directorio `assets/`; el
+HTML referencia las hojas de estilo y el script por ruta relativa.
+
+## Contenido y claims
+
+Las afirmaciones publicadas en la Home se auditan contra el repositorio de
+producto `jccmdjf-spec/ultranet-isp-v3`. La clasificación vigente vive en
+[`docs/PRODUCT_SOURCE_MAP.md`](docs/PRODUCT_SOURCE_MAP.md).
+
+No se publican cifras, estados comerciales por módulo, integraciones, SLA ni
+capacidades técnicas sin evidencia en código o documentación vigente.
 
 ## Repositorio de trabajo
 
