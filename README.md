@@ -30,6 +30,7 @@ assets/
   css/site.css
   js/site.js
   img/favicon.svg
+  img/valkiria-isotipo.svg
 ```
 
 Raíz productiva:
@@ -47,6 +48,12 @@ producto `jccmdjf-spec/ultranet-isp-v3`. La clasificación vigente vive en
 
 No se publican cifras, estados comerciales por módulo, integraciones, SLA ni
 capacidades técnicas sin evidencia en código o documentación vigente.
+
+## Identidad visual
+
+El logo, el favicon y la paleta se documentan en
+[`docs/BRANDING.md`](docs/BRANDING.md), incluida la procedencia del isotipo y
+los pendientes de marca.
 
 ## Repositorio de trabajo
 

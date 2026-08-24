@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 194" role="img" aria-label="Isotipo de Valkiria Technology">
+  <title>Valkiria Technology</title>
+  <!-- Cada galón se dibuja completo y luego se superpone el ala izquierda:
+       evita la costura de antialiasing en el pliegue central. -->
+  <defs>
+    <linearGradient id="vk-navL" x1="0" y1="0" x2="128" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3A6786"/>
+      <stop offset="1" stop-color="#1E3A57"/>
+    </linearGradient>
+    <linearGradient id="vk-navR" x1="256" y1="0" x2="128" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#33607E"/>
+      <stop offset="1" stop-color="#16273F"/>
+    </linearGradient>
+    <linearGradient id="vk-ambL" x1="61" y1="134" x2="128" y2="194" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F2B03A"/>
+      <stop offset="1" stop-color="#E09A1F"/>
+    </linearGradient>
+    <linearGradient id="vk-ambR" x1="195" y1="134" x2="128" y2="194" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EFA92F"/>
+      <stop offset="1" stop-color="#D9911A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Galón superior -->
+  <path d="M0 0 L128 90 L256 0 L128 50 Z" fill="url(#vk-navR)"/>
+  <path d="M0 0 L128 90 L128 50 Z" fill="url(#vk-navL)"/>
+
+  <!-- Galón intermedio -->
+  <path d="M31.5 67 L128 134 L224.5 67 L128 99 Z" fill="url(#vk-navR)"/>
+  <path d="M31.5 67 L128 134 L128 99 Z" fill="url(#vk-navL)"/>
+
+  <!-- Galón inferior (ámbar) -->
+  <path d="M61.5 134 L128 194 L194.5 134 L128 160 Z" fill="url(#vk-ambR)"/>
+  <path d="M61.5 134 L128 194 L128 160 Z" fill="url(#vk-ambL)"/>
+</svg>
