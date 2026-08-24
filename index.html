@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valkiria Cloud — Controla tu red. Administra tu ISP.</title>
+<meta name="description" content="Valkiria Cloud: la plataforma para ISPs que controla la red de verdad — VLANs, firewall, BGP e IPv6 nativo — y administra clientes, facturación y soporte en un solo lugar.">
+<style>
+  :root{
+    --bg:#0b0f1a;
+    --bg2:#111827;
+    --card:#151d2e;
+    --border:#243049;
+    --text:#e5e9f2;
+    --muted:#93a0b8;
+    --accent:#38bdf8;
+    --accent2:#818cf8;
+    --ok:#34d399;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+    line-height:1.6;
+  }
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:10;
+    background:rgba(11,15,26,.85);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.15rem;color:var(--text)}
+  .logo svg{flex:none}
+  .nav-links{display:flex;gap:26px;font-size:.95rem}
+  .nav-links a{color:var(--muted)}
+  .nav-links a:hover{color:var(--text)}
+  .btn{
+    display:inline-block;padding:10px 22px;border-radius:8px;font-weight:600;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0b0f1a;
+  }
+  .btn:hover{filter:brightness(1.1)}
+  .btn.ghost{background:none;border:1px solid var(--border);color:var(--text)}
+
+  /* HERO */
+  header{
+    padding:90px 0 70px;
+    background:
+      radial-gradient(600px 300px at 20% 0%,rgba(56,189,248,.12),transparent),
+      radial-gradient(600px 300px at 80% 10%,rgba(129,140,248,.12),transparent);
+    text-align:center;
+  }
+  .tag{
+    display:inline-block;padding:6px 14px;border:1px solid var(--border);
+    border-radius:999px;color:var(--accent);font-size:.85rem;margin-bottom:22px;
+    background:rgba(56,189,248,.06);
+  }
+  h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.15;margin-bottom:18px}
+  h1 .grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{max-width:680px;margin:0 auto 34px;color:var(--muted);font-size:1.12rem}
+  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  /* SECTIONS */
+  section{padding:70px 0}
+  .sec-title{text-align:center;font-size:2rem;margin-bottom:10px}
+  .sec-sub{text-align:center;color:var(--muted);max-width:640px;margin:0 auto 46px}
+
+  .grid{display:grid;gap:20px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:26px;
+  }
+  .card h3{margin-bottom:10px;font-size:1.12rem;display:flex;align-items:center;gap:10px}
+  .card p{color:var(--muted);font-size:.95rem}
+  .ico{
+    width:38px;height:38px;border-radius:9px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(56,189,248,.12);color:var(--accent);font-size:1.2rem;
+  }
+
+  /* DIFERENCIADOR */
+  .diff{
+    background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  }
+  .diff-in{display:grid;gap:40px;grid-template-columns:1fr 1fr;align-items:center}
+  @media(max-width:800px){.diff-in{grid-template-columns:1fr}}
+  .diff ul{list-style:none;margin-top:18px}
+  .diff li{padding:9px 0;color:var(--muted);display:flex;gap:10px;align-items:flex-start}
+  .diff li b{color:var(--text)}
+  .check{color:var(--ok);font-weight:700}
+  .term{
+    background:#0a0e17;border:1px solid var(--border);border-radius:12px;
+    font-family:Consolas,Menlo,monospace;font-size:.82rem;color:#9fe8ff;
+    padding:20px;overflow:auto;line-height:1.7;
+  }
+  .term .p{color:#5eead4}
+  .term .c{color:#64748b}
+
+  /* MODULOS */
+  .mod .card{position:relative}
+  .soon{
+    position:absolute;top:14px;right:14px;font-size:.7rem;letter-spacing:.5px;
+    color:var(--accent2);border:1px solid var(--border);padding:3px 9px;border-radius:999px;
+  }
+  .live{color:var(--ok);border-color:rgba(52,211,153,.4)}
+
+  /* STATS */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:20px;text-align:center}
+  .stat b{font-size:2rem;display:block;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat span{color:var(--muted);font-size:.9rem}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--border);padding:40px 0;color:var(--muted);font-size:.9rem}
+  .foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <div class="logo">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <path d="M3 4l9 16L21 4h-4.5L12 13 7.5 4H3z" fill="url(#g)"/>
+        <defs><linearGradient id="g" x1="3" y1="4" x2="21" y2="20"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#818cf8"/></linearGradient></defs>
+      </svg>
+      Valkiria<span style="color:var(--accent)">Cloud</span>
+    </div>
+    <div class="nav-links">
+      <a href="#plataforma">Plataforma</a>
+      <a href="#diferencia">Por qué Valkiria</a>
+      <a href="#modulos">Módulos</a>
+      <a href="https://docs.valkiriacloud.com">Docs</a>
+    </div>
+    <a class="btn" href="https://app.valkiriacloud.com">Ingresar</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <span class="tag">⚡ Plataforma integral para ISPs y WISPs</span>
+    <h1>Controla tu <span class="grad">red</span>.<br>Administra tu <span class="grad">ISP</span>.</h1>
+    <p class="sub">
+      Valkiria no es otro panel de facturación: es un motor que gobierna tu red real —
+      VLANs, firewall, BGP e IPv6 nativo — con la gestión de clientes integrada en el mismo lugar.
+    </p>
+    <div class="cta">
+      <a class="btn" href="https://app.valkiriacloud.com">Entrar al panel</a>
+      <a class="btn ghost" href="#plataforma">Conocer la plataforma</a>
+    </div>
+  </div>
+</header>
+
+<section id="plataforma">
+  <div class="wrap">
+    <h2 class="sec-title">Una sola plataforma, toda tu operación</h2>
+    <p class="sec-sub">Del núcleo de la red al bolsillo del cliente: cada pieza de tu ISP, conectada.</p>
+    <div class="grid g3">
+      <div class="card">
+        <h3><span class="ico">🖧</span>Red bajo control real</h3>
+        <p>Gestión de VLANs, segmentos de clientes, NAT y firewall nftables directamente a nivel del sistema — no solo tickets RADIUS.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico">🌐</span>IPv6 nativo</h3>
+        <p>Direccionamiento IPv6 de tu propio bloque, gestionado de forma estática y predecible para cada cliente y cada nodo.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico">🔀</span>BGP y multihoming</h3>
+        <p>Tu ISP con presencia propia en internet: anuncios BGP, múltiples salidas y control del tráfico de borde.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico">👥</span>Clientes y planes</h3>
+        <p>Alta, suspensión y control de ancho de banda de cada cliente, sincronizado con la red en tiempo real.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico">🧾</span>Facturación y cobros</h3>
+        <p>Facturas, cortes automáticos por mora y reconexión inmediata al registrar el pago.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico">🛠️</span>Soporte e instalaciones</h3>
+        <p>Tickets, órdenes de instalación y contratos digitales — con portal para clientes y para técnicos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="diff" id="diferencia">
+  <div class="wrap diff-in">
+    <div>
+      <h2 style="font-size:1.9rem;margin-bottom:8px">La diferencia Valkiria</h2>
+      <p style="color:var(--muted)">Las plataformas tradicionales para ISP son "facturación primero, red después". Valkiria nació al revés: <b style="color:var(--text)">primero domina la red, luego la administra</b>.</p>
+      <ul>
+        <li><span class="check">✓</span><span><b>Motor de red a nivel de kernel</b> — el panel no le "pide" cambios al router: los ejecuta en el sistema.</span></li>
+        <li><span class="check">✓</span><span><b>Producción real</b> — operando una red viva con cientos de clientes, no un demo de laboratorio.</span></li>
+        <li><span class="check">✓</span><span><b>Actualizaciones sin riesgo</b> — el código viaja, tus datos nunca: cada nodo conserva sus clientes y su configuración.</span></li>
+        <li><span class="check">✓</span><span><b>Hecho por un ISP, para ISPs</b> — cada función existe porque una red real la necesitó.</span></li>
+      </ul>
+    </div>
+    <div class="term">
+      <div><span class="p">valkiria&gt;</span> estado del nodo</div>
+      <div>NODO-CALI ......... <span style="color:#34d399">ACTIVO</span></div>
+      <div>Clientes en línea .. 105</div>
+      <div>VLANs .............. 420, 400 <span class="c"># núcleo + gestión</span></div>
+      <div>IPv6 ............... nativo /32 <span class="c"># bloque propio</span></div>
+      <div>BGP ................ 2 sesiones <span style="color:#34d399">ESTABLECIDAS</span></div>
+      <div>Firewall ........... nftables <span style="color:#34d399">OK</span></div>
+      <div>&nbsp;</div>
+      <div><span class="p">valkiria&gt;</span> actualizar nodo</div>
+      <div>Versión nueva encontrada → aplicando<span class="c"> (los datos no se tocan)</span></div>
+      <div>Actualización completada <span style="color:#34d399">✓</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="mod" id="modulos">
+  <div class="wrap">
+    <h2 class="sec-title">El ecosistema Valkiria</h2>
+    <p class="sec-sub">Módulos que crecen contigo: empieza por el núcleo y suma piezas cuando tu operación las pida.</p>
+    <div class="grid g3">
+      <div class="card">
+        <span class="soon live">EN PRODUCCIÓN</span>
+        <h3><span class="ico">⚙️</span>Valkiria Core</h3>
+        <p>El motor de red que corre en cada nodo: VLANs, firewall, ancho de banda, IPv6 y BGP.</p>
+      </div>
+      <div class="card">
+        <span class="soon live">EN PRODUCCIÓN</span>
+        <h3><span class="ico">☁️</span>Valkiria Cloud</h3>
+        <p>El panel central: administra todos tus nodos, clientes y planes desde un solo lugar.</p>
+      </div>
+      <div class="card">
+        <span class="soon">PRÓXIMAMENTE</span>
+        <h3><span class="ico">💳</span>Valkiria Pay</h3>
+        <p>Facturación electrónica, pasarelas de pago y recaudo automatizado.</p>
+      </div>
+      <div class="card">
+        <span class="soon">PRÓXIMAMENTE</span>
+        <h3><span class="ico">🤝</span>Valkiria Clientes</h3>
+        <p>CRM, tickets de soporte y contratos digitales con firma en línea.</p>
+      </div>
+      <div class="card">
+        <span class="soon">PRÓXIMAMENTE</span>
+        <h3><span class="ico">📱</span>Valkiria App</h3>
+        <p>La app para tu cliente final: facturas, pagos, soporte y estado del servicio.</p>
+      </div>
+      <div class="card">
+        <span class="soon">PRÓXIMAMENTE</span>
+        <h3><span class="ico">🚐</span>Valkiria Field</h3>
+        <p>Órdenes de trabajo y rutas para tus técnicos de instalación y mantenimiento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>105+</b><span>clientes en producción</span></div>
+      <div class="stat"><b>24/7</b><span>red monitoreada</span></div>
+      <div class="stat"><b>IPv6</b><span>nativo de fábrica</span></div>
+      <div class="stat"><b>BGP</b><span>borde propio</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>© 2026 Valkiria Cloud · Hecho en Colombia 🇨🇴</div>
+    <div>
+      <a href="https://app.valkiriacloud.com">Panel</a> ·
+      <a href="https://docs.valkiriacloud.com">Documentación</a> ·
+      <a href="mailto:info@ultranetcolombia.com">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Temporales
+*.tmp
+*.log
+*.bak
+*.swp
+*~
+
+# Dependencias futuras
+node_modules/
+
+# Variables y secretos
+.env
+.env.*
+!.env.example
+
+# Build futuro
+dist/
+build/
+
+# QA y capturas temporales
+screenshots/
+playwright-report/
+test-results/
