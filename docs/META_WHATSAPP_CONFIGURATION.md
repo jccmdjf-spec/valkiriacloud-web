@@ -114,15 +114,12 @@ ValkiriaCloud esa URL es `/eliminacion-datos/`, que ofrece dos vías:
 El backend del formulario está documentado en
 [`integrations/google-apps-script/privacy-requests/README.md`](../integrations/google-apps-script/privacy-requests/README.md).
 
-> **Estado:** el código del Web App está listo pero **no desplegado**; requiere
-> la cuenta de Google Workspace del propietario. Mientras tanto la página
-> muestra el canal de correo, que es suficiente para cumplir el requisito de
-> Meta.
+> **Estado:** desplegado y conectado. El formulario público envía al Web App
+> real y devuelve un número de referencia. El correo sigue publicado como canal
+> alternativo.
 
 ## Pendientes del propietario
 
-1. Desplegar el Web App de Apps Script y pegar la URL `/exec` en
-   `assets/js/privacy-request.js`.
-2. Tramitar el NIT ante la DIAN y decidir si se publica.
-3. Confirmar la ortografía de la marca: el logo dice «TECNOLOGY» y el texto del
+1. Tramitar el NIT ante la DIAN y decidir si se publica.
+2. Confirmar la ortografía de la marca: el logo dice «TECNOLOGY» y el texto del
    sitio dice «Technology».

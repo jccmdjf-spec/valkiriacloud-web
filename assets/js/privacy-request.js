@@ -7,14 +7,16 @@
 (function () {
   "use strict";
 
-  /* Sustituir por la URL /exec del Web App cuando el propietario lo despliegue.
-     Ver integrations/google-apps-script/privacy-requests/README.md */
-  var APPS_SCRIPT_ENDPOINT = "PENDIENTE_CONFIGURACION";
+  /* Web App de Google Apps Script. La URL es pública por diseño: la validación
+     real ocurre en el servidor. Ver integrations/google-apps-script/privacy-requests/ */
+  var APPS_SCRIPT_ENDPOINT =
+    "https://script.google.com/macros/s/AKfycbykJJpQvqDvcra61gYAMF3q35hs_6F5jtBoXv1gSwU5N49oDrIM2eReKhpdXCm9IeXRfQ/exec";
 
   var CONTACT_EMAIL = "info@valkiriacloud.com";
 
   var LIMITS = {
     nombre: 120,
+    documento: 50,
     correo: 200,
     telefono: 40,
     empresa: 200,
@@ -54,6 +56,7 @@
   function validate(data) {
     var errors = [];
     if (!data.nombre) errors.push("el nombre completo");
+    if (!data.documento) errors.push("el documento de identidad");
     if (!data.correo) errors.push("el correo electrónico");
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.correo)) errors.push("un correo electrónico válido");
     if (!data.empresa) errors.push("la empresa o ISP relacionada");
@@ -75,6 +78,7 @@
     var fd = new FormData(form);
     var data = {
       nombre: (fd.get("nombre") || "").trim(),
+      documento: (fd.get("documento") || "").trim(),
       correo: (fd.get("correo") || "").trim(),
       telefono: (fd.get("telefono") || "").trim(),
       empresa: (fd.get("empresa") || "").trim(),

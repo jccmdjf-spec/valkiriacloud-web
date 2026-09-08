@@ -741,7 +741,9 @@ body.nav-open { overflow: hidden; }
 .field textarea::placeholder { color: var(--idle); }
 
 /* Casilla de confirmación */
-.check { display: flex; align-items: flex-start; gap: 10px; }
+/* `.check` también lleva `.field`, que apila en columna: hay que devolver la
+   fila explícitamente para que la casilla quede junto a su texto. */
+.check { display: flex; flex-direction: row; align-items: flex-start; gap: 10px; }
 .check input[type="checkbox"] {
   width: 18px; height: 18px; min-height: 0; flex: none;
   margin-top: 3px; accent-color: var(--brand);

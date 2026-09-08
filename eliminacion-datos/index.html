@@ -185,10 +185,11 @@
 
         <div class="callout">
           <p>
-            <strong>No pedimos documentos de identidad.</strong> El formulario solicita el
-            mínimo necesario para identificar tu caso. Podremos solicitar información
-            adicional únicamente si es necesaria para verificar tu identidad o localizar la
-            información relacionada.
+            <strong>Solicitamos únicamente el número o identificador del documento</strong>
+            cuando es necesario para localizar la información relacionada con tu solicitud y
+            verificar que eres el titular. <strong>No solicitamos fotografías del documento,
+            firmas, contraseñas ni datos bancarios</strong> por este formulario. Podremos
+            pedir información adicional solo si resulta necesaria para esa verificación.
           </p>
           <p>
             Nunca te pediremos contraseñas, datos bancarios ni el número de tu tarjeta por
@@ -216,12 +217,19 @@
             </div>
 
             <div class="field">
+              <label for="documento">Documento de identidad <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="documento" name="documento" maxlength="50" required
+                     aria-describedby="documento-hint">
+              <span class="hint" id="documento-hint">Nos ayuda a localizar tu información y verificar tu solicitud.</span>
+            </div>
+
+            <div class="field">
               <label for="telefono">Teléfono o WhatsApp <span class="hint" style="font-weight:400">(opcional)</span></label>
               <input type="tel" id="telefono" name="telefono" maxlength="40" autocomplete="tel">
             </div>
 
-            <div class="field">
-              <label for="referencia">Número de servicio, contrato o referencia <span class="hint" style="font-weight:400">(opcional)</span></label>
+            <div class="field field--full">
+              <label for="referencia">Número de servicio, contrato o referencia</label>
               <input type="text" id="referencia" name="referencia" maxlength="100"
                      aria-describedby="referencia-hint">
               <span class="hint" id="referencia-hint">Si lo tienes a mano, agiliza la búsqueda.</span>

@@ -4,10 +4,9 @@ Backend del formulario de [`/eliminacion-datos/`](../../../eliminacion-datos/ind
 Recibe la solicitud, la registra en Google Sheets, notifica al equipo y devuelve
 un identificador de seguimiento.
 
-> **Estado:** el código está listo. El Web App **no está desplegado** todavía,
-> porque desplegarlo requiere acceso a la cuenta de Google Workspace del
-> propietario. Mientras tanto, la página muestra el correo
-> `info@valkiriacloud.com` como canal alternativo, que es igualmente válido.
+> **Estado:** desplegado y conectado (TASK-20260908-002). El formulario público
+> envía al Web App real. El correo `info@valkiriacloud.com` sigue publicado como
+> canal alternativo.
 
 ## Qué hace
 
@@ -19,6 +18,19 @@ un identificador de seguimiento.
 6. Envía el aviso a `info@valkiriacloud.com` con `replyTo` del solicitante.
 7. Envía una confirmación al solicitante con su ID.
 8. Devuelve `{"ok": true, "id": "VK-PRIV-..."}`.
+
+### Cómo se escribe la fila
+
+El script **localiza cada columna por el nombre de su encabezado**, no por
+posición. Consecuencias prácticas:
+
+- las columnas de la hoja pueden estar en cualquier orden;
+- si falta alguna columna canónica, se añade al final; ninguna existente se
+  mueve, se duplica ni se sobrescribe;
+- reordenar columnas a mano en la hoja no rompe el registro.
+
+La escritura va dentro de un `LockService` para que dos envíos simultáneos no
+compitan por la misma fila.
 
 ## Instalación
 
@@ -92,14 +104,10 @@ https://script.google.com/macros/s/AKfycb.../exec
 
 ### 8. Conectar el frontend
 
-En [`assets/js/privacy-request.js`](../../../assets/js/privacy-request.js),
-sustituye:
-
-```js
-var APPS_SCRIPT_ENDPOINT = "PENDIENTE_CONFIGURACION";
-```
-
-por la URL del paso 7. Haz commit y despliega.
+Ya está conectado en
+[`assets/js/privacy-request.js`](../../../assets/js/privacy-request.js). Si
+vuelves a desplegar el Web App y Google emite una URL nueva, sustituye el valor
+de `APPS_SCRIPT_ENDPOINT`, haz commit y despliega.
 
 > La URL del Web App **no es un secreto**: queda visible en el JavaScript
 > público. Por eso toda la validación se hace en el servidor. **No añadas
@@ -126,17 +134,21 @@ También puedes ejecutar `pruebaManual()` desde el editor sin pasar por la web.
 | 2 | Fecha UTC | Generado (ISO 8601) |
 | 3 | Fecha Colombia | Generado (`America/Bogota`) |
 | 4 | Nombre | Formulario (obligatorio) |
-| 5 | Correo | Formulario (obligatorio) |
-| 6 | Teléfono | Formulario (opcional) |
-| 7 | Empresa / ISP | Formulario (obligatorio) |
-| 8 | Referencia servicio / contrato | Formulario (opcional) |
-| 9 | Tipo de solicitud | Formulario (lista cerrada) |
-| 10 | Descripción | Formulario (obligatorio) |
-| 11 | Estado | `RECIBIDA` al crearse; se actualiza a mano |
-| 12 | Fecha de respuesta | Se completa a mano |
-| 13 | Observaciones | Se completa a mano |
-| 14 | Origen | URL desde la que se envió |
-| 15 | User-Agent | Navegador, si el cliente lo aporta |
+| 5 | Documento | Formulario (obligatorio) — número o identificador, sin foto |
+| 6 | Correo | Formulario (obligatorio) |
+| 7 | Teléfono | Formulario (opcional) |
+| 8 | Empresa / ISP | Formulario (obligatorio) |
+| 9 | Referencia servicio / contrato | Formulario (opcional) |
+| 10 | Tipo de solicitud | Formulario (lista cerrada) |
+| 11 | Descripción | Formulario (obligatorio) |
+| 12 | Estado | `RECIBIDA` al crearse; se actualiza a mano |
+| 13 | Fecha de respuesta | Se completa a mano |
+| 14 | Observaciones | Se completa a mano |
+| 15 | Origen | URL desde la que se envió |
+| 16 | User-Agent | Navegador, si el cliente lo aporta |
+
+El número de orden es el del **orden canónico**; en la hoja real las columnas
+pueden estar en otra posición sin que eso afecte al registro.
 
 Las columnas 11 a 13 son de gestión interna: el script no las sobrescribe.
 
@@ -145,7 +157,10 @@ Las columnas 11 a 13 son de gestión interna: el script no las sobrescribe.
 | Control | Detalle |
 | --- | --- |
 | Campo trampa | `website`; si llega con contenido, se responde `ok` y no se registra nada |
-| Longitudes | nombre 120 · correo 200 · empresa 200 · teléfono 40 · referencia 100 · descripción 3000 |
+| Longitudes | nombre 120 · documento 50 · correo 200 · empresa 200 · teléfono 40 · referencia 100 · descripción 3000 |
+| Fórmulas en Sheets | `safeCell_()` antepone un apóstrofo a los valores que empiezan por `=`, `+`, `-` o `@` |
+| Controles y saltos | `cleanLine_()` en campos de una línea; `cleanText_()` conserva los saltos solo en la descripción |
+| Concurrencia | `LockService` alrededor de la escritura |
 | Tipos permitidos | Lista cerrada; cualquier otro valor se rechaza |
 | Correo | Validación de formato en cliente y en servidor |
 | Escape | Los correos se envían en **texto plano**; el contenido del usuario nunca se interpreta como HTML |
