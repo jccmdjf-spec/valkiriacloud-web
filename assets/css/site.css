@@ -19,7 +19,8 @@
      3. Layout
      4. Componentes
      5. Secciones
-     6. Movimiento reducido
+     6. Páginas legales, formulario y redes
+     7. Movimiento reducido
    ========================================================================== */
 
 /* ==========================================================================
@@ -569,7 +570,7 @@ body.nav-open { overflow: hidden; }
   gap: var(--s6); padding-bottom: var(--s6);
   border-bottom: 1px solid var(--border);
 }
-@media (min-width: 760px) { .footer-grid { grid-template-columns: minmax(0, 1.5fr) repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 760px) { .footer-grid { grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); } }
 .footer-brand p { margin-top: var(--s3); color: var(--ink-subtle); font-size: var(--fs-sm); max-width: 42ch; }
 .footer-org {
   display: block; margin-top: var(--s3);
@@ -596,7 +597,247 @@ body.nav-open { overflow: hidden; }
 }
 
 /* ==========================================================================
-   6. MOVIMIENTO REDUCIDO
+   6. PÁGINAS LEGALES, FORMULARIO Y REDES (TASK-20260908-001)
+   Reutiliza los tokens de la dirección Enterprise. Sin colores nuevos.
+   ========================================================================== */
+
+/* --- 7.1 Documento legal ------------------------------------------------- */
+.legal { padding-block: clamp(40px, 5vw, 72px) clamp(52px, 7vw, 96px); }
+
+.legal-head { max-width: 70ch; margin-bottom: clamp(32px, 4vw, 48px); }
+.legal-head h1 {
+  font-size: clamp(1.9rem, 1.45rem + 1.9vw, 2.75rem);
+  line-height: var(--lh-snug);
+  margin-bottom: var(--s4);
+}
+.legal-head .legal-lead { color: var(--ink-muted); font-size: var(--fs-lead); }
+.legal-meta {
+  display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5);
+  margin-top: var(--s5); padding-top: var(--s4);
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-meta); color: var(--ink-subtle);
+}
+
+.back-link {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: var(--fs-sm); font-weight: 560;
+  color: var(--ink-muted); margin-bottom: var(--s5);
+  min-height: 44px;
+}
+.back-link:hover { color: var(--ink); }
+.back-link svg { width: var(--icon-sm); height: var(--icon-sm); flex: none; }
+
+/* Índice de contenidos */
+.toc {
+  max-width: 70ch;
+  padding: var(--s5) 0;
+  border-block: 1px solid var(--border);
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+.toc h2 {
+  font-size: var(--fs-meta); font-weight: 680;
+  letter-spacing: var(--ls-wide); text-transform: uppercase;
+  color: var(--ink-subtle); margin-bottom: var(--s3);
+}
+.toc ol { list-style: none; counter-reset: toc; columns: 2; column-gap: var(--s7); }
+.toc li { counter-increment: toc; break-inside: avoid; margin-bottom: 7px; }
+.toc a { font-size: var(--fs-sm); color: var(--ink-muted); }
+.toc a::before { content: counter(toc) ". "; color: var(--ink-subtle); }
+.toc a:hover { color: var(--ink); }
+@media (max-width: 639px) { .toc ol { columns: 1; } }
+
+/* Cuerpo del documento: ancho de lectura ~70ch */
+.prose { max-width: 70ch; }
+.prose > section + section { margin-top: clamp(36px, 4vw, 52px); }
+.prose h2 {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--s4);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--border);
+  scroll-margin-top: 92px;
+}
+.prose h3 {
+  font-size: var(--fs-base); font-weight: 660;
+  margin: var(--s5) 0 var(--s2);
+}
+.prose p { color: var(--ink-muted); }
+.prose p + p { margin-top: var(--s3); }
+.prose ul, .prose ol { margin: var(--s3) 0 0; padding-left: 1.35em; }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li { color: var(--ink-muted); margin-bottom: 6px; }
+.prose li::marker { color: var(--ink-subtle); }
+.prose strong { color: var(--ink); }
+.prose a { text-decoration: underline; text-underline-offset: 3px; }
+.prose dl { margin-top: var(--s3); }
+.prose dt { color: var(--ink); font-weight: 620; margin-top: var(--s3); }
+.prose dd { color: var(--ink-muted); }
+
+/* Aviso destacado, sin tarjeta: filete ámbar a la izquierda */
+.callout {
+  margin-top: var(--s5);
+  padding: var(--s4) 0 var(--s4) var(--s5);
+  border-left: 3px solid var(--accent);
+  background: var(--surface-muted);
+}
+.callout p { color: var(--ink-muted); font-size: var(--fs-sm); }
+.callout p + p { margin-top: var(--s2); }
+.callout strong { color: var(--ink); }
+
+/* Bloque de datos de contacto */
+.contact-block {
+  margin-top: var(--s4);
+  border-top: 1px solid var(--border);
+}
+.contact-block div {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: 2px; padding: var(--s3) 0;
+  border-bottom: 1px solid var(--border);
+}
+@media (min-width: 560px) {
+  .contact-block div { grid-template-columns: 13rem minmax(0, 1fr); gap: var(--s4); align-items: baseline; }
+}
+.contact-block dt { font-size: var(--fs-sm); color: var(--ink-subtle); font-weight: 560; margin: 0; }
+.contact-block dd { font-size: var(--fs-sm); color: var(--ink); }
+
+/* --- 7.2 Formulario ------------------------------------------------------ */
+.form { max-width: 46rem; margin-top: var(--s6); }
+.form-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s5); }
+@media (min-width: 700px) {
+  .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .field--full { grid-column: 1 / -1; }
+}
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: var(--fs-sm); font-weight: 620; color: var(--ink); }
+.field .req { color: var(--accent-ink); font-weight: 700; }
+.field .hint { font-size: var(--fs-meta); color: var(--ink-subtle); line-height: 1.5; }
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border-control);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.16s ease;
+}
+.field textarea { min-height: 132px; resize: vertical; line-height: 1.6; }
+.field select { appearance: none; padding-right: 38px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235C6878' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 11px center; background-size: 17px; }
+.field input:hover,
+.field select:hover,
+.field textarea:hover { border-color: var(--ink-subtle); }
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible { border-color: var(--navy-600); }
+.field input::placeholder,
+.field textarea::placeholder { color: var(--idle); }
+
+/* Casilla de confirmación */
+.check { display: flex; align-items: flex-start; gap: 10px; }
+.check input[type="checkbox"] {
+  width: 18px; height: 18px; min-height: 0; flex: none;
+  margin-top: 3px; accent-color: var(--brand);
+  border-radius: var(--radius-sm);
+}
+.check label { font-size: var(--fs-sm); font-weight: 400; color: var(--ink-muted); line-height: 1.6; }
+.check label strong { color: var(--ink); font-weight: 620; }
+
+/* Honeypot: fuera de pantalla, no `display:none` (algunos bots lo detectan) */
+.hp {
+  position: absolute; left: -9999px; top: auto;
+  width: 1px; height: 1px; overflow: hidden;
+}
+
+.form-actions {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--s4);
+  margin-top: var(--s6);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--border);
+}
+.form button[type="submit"][disabled] { opacity: 0.6; cursor: progress; }
+
+/* Estado accesible del envío */
+.form-status { font-size: var(--fs-sm); line-height: 1.6; }
+.form-status:empty { display: none; }
+.form-status[data-state="sending"] { color: var(--ink-muted); }
+.form-status[data-state="ok"] {
+  color: var(--ink);
+  padding: var(--s4) 0 var(--s4) var(--s5);
+  border-left: 3px solid var(--ok);
+  background: var(--surface-muted);
+}
+.form-status[data-state="error"] {
+  color: var(--ink);
+  padding: var(--s4) 0 var(--s4) var(--s5);
+  border-left: 3px solid var(--accent);
+  background: var(--surface-muted);
+}
+.form-status .req-id {
+  display: inline-block; margin-top: 6px;
+  font-family: var(--font-mono); font-size: var(--fs-sm);
+  color: var(--ink); font-weight: 620;
+}
+
+/* --- 7.3 Redes sociales -------------------------------------------------- */
+.social {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--s3);
+}
+.social a {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm); font-weight: 560;
+  color: var(--ink-muted);
+  background: var(--surface);
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+.social a:hover { border-color: var(--border-control); color: var(--ink); }
+.social svg { width: var(--icon-sm); height: var(--icon-sm); flex: none; }
+
+/* Variante dentro del CTA de cierre */
+.social-note {
+  margin-top: var(--s6); padding-top: var(--s5);
+  border-top: 1px solid var(--border);
+}
+.social-note p {
+  font-size: var(--fs-meta); color: var(--ink-subtle);
+  margin-bottom: var(--s3);
+}
+.cta .social { justify-content: center; }
+
+/* Variante compacta del pie */
+.footer-social { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s4); }
+.footer-social a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink-muted);
+  transition: border-color 0.16s ease, color 0.16s ease;
+}
+.footer-social a:hover { border-color: var(--border-control); color: var(--ink); }
+.footer-social svg { width: var(--icon-sm); height: var(--icon-sm); }
+
+/* Datos corporativos del pie */
+.footer-legal {
+  margin-top: var(--s4);
+  font-size: var(--fs-meta); color: var(--ink-subtle); line-height: 1.7;
+}
+.footer-legal a { color: var(--ink-muted); }
+.footer-legal a:hover { color: var(--ink); }
+
+/* ==========================================================================
+   7. MOVIMIENTO REDUCIDO
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
