@@ -36,7 +36,7 @@ valkiriacloud.com
 | --- | --- |
 | Razón social | VALKIRIA TECHNOLOGY S.A.S. |
 | Marca | VALKIRIA TECHNOLOGY |
-| Producto | ValkiriaCloud — Plataforma ISP SaaS |
+| Producto | ValkiriaCloud — aplicaciones de Valkiria Technology (hoy, la Plataforma ISP) |
 | Ciudad | Cali, Valle del Cauca, Colombia |
 | Correo | `info@valkiriacloud.com` |
 | Teléfono / WhatsApp | `+57 333 4012896` |

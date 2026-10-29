@@ -555,7 +555,7 @@ body.nav-open { overflow: hidden; }
   width: 36px; height: 3px; background: var(--accent);
   margin: 0 auto var(--s5);
 }
-.cta h2 { max-width: 18ch; margin-inline: auto; }
+.cta h2 { max-width: 24ch; margin-inline: auto; }
 .cta p {
   color: var(--ink-muted); font-size: var(--fs-lead);
   max-width: 56ch; margin: var(--s4) auto 0;
@@ -837,6 +837,108 @@ body.nav-open { overflow: hidden; }
 }
 .footer-legal a { color: var(--ink-muted); }
 .footer-legal a:hover { color: var(--ink); }
+
+/* ==========================================================================
+   8. HUB DE APLICACIONES (TASK-20261029-001)
+   ValkiriaCloud pasa de producto único a marca paraguas. Mismos tokens y
+   misma proporción 80/15/5: la tarjeta de aplicación es un objeto discreto
+   (una aplicación), no un recurso decorativo.
+   ========================================================================== */
+
+/* --- Ruta de navegación y cabecera de página ----------------------------- */
+.crumbs {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  font-size: var(--fs-sm); color: var(--ink-subtle);
+}
+.crumbs a { color: var(--ink-muted); }
+.crumbs a:hover { color: var(--ink); }
+.crumbs-wrap { padding-top: var(--s5); }
+.crumbs-wrap + .hero { padding-top: clamp(28px, 4vw, 56px); }
+
+.page-head { padding-block: clamp(28px, 4vw, 56px) clamp(28px, 4vw, 48px); }
+.page-head .crumbs { margin-bottom: var(--s6); }
+.page-head h1 { font-size: clamp(2rem, 1.5rem + 2.2vw, 3.1rem); max-width: 22ch; }
+.page-lead { color: var(--ink-muted); font-size: var(--fs-lead); max-width: 54ch; margin-top: var(--s4); }
+.apps-section { padding-top: 0; }
+
+/* --- Tarjeta de aplicación ----------------------------------------------- */
+.apps {
+  display: grid; gap: var(--s5);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+}
+.app {
+  position: relative; display: flex; flex-direction: column; gap: var(--s3);
+  padding: var(--s6);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+}
+.app::before {
+  content: ""; position: absolute; inset: -1px -1px auto -1px;
+  height: 3px; background: var(--accent);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.app:hover { border-color: var(--navy-600); box-shadow: var(--shadow-md); }
+.app-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }
+.app-tag {
+  font-size: var(--fs-meta); font-weight: 680;
+  letter-spacing: var(--ls-wide); text-transform: uppercase;
+  color: var(--ink-subtle);
+}
+.app h3, .app .app-title { font-size: 1.375rem; line-height: var(--lh-snug); letter-spacing: -0.018em; }
+.app p { color: var(--ink-muted); font-size: var(--fs-sm); line-height: 1.65; }
+.app-meta { display: flex; flex-wrap: wrap; gap: 7px; margin-top: var(--s2); }
+.app-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: auto; padding-top: var(--s4); }
+
+/* Ranura «a tu medida»: invita, no promete. */
+.app--custom {
+  border-style: dashed; border-color: var(--border-control);
+  background: var(--surface-muted); box-shadow: none;
+}
+.app--custom::before { display: none; }
+.app--custom:hover { box-shadow: none; }
+
+/* --- Visual del hero: lanzador de aplicaciones --------------------------- */
+.launcher { padding: var(--s5); }
+.launcher .product-title { margin-bottom: var(--s4); }
+.launcher-row {
+  display: flex; align-items: center; gap: var(--s4);
+  padding: var(--s4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.launcher-row + .launcher-row { margin-top: var(--s3); }
+.launcher-row--active { box-shadow: inset 3px 0 0 var(--accent); }
+.launcher-row--empty { border-style: dashed; border-color: var(--border-control); background: var(--surface-muted); }
+.launcher-mark {
+  flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong); background: var(--surface-muted);
+  font-size: var(--fs-meta); font-weight: 720; letter-spacing: 0.04em; color: var(--ink);
+}
+.launcher-row--empty .launcher-mark { color: var(--ink-subtle); font-size: 1.25rem; font-weight: 500; }
+.launcher-text { flex: 1 1 150px; min-width: 0; }
+.launcher-text b { display: block; font-size: var(--fs-base); font-weight: 650; color: var(--ink); }
+.launcher-text span { display: block; font-size: var(--fs-sm); color: var(--ink-subtle); }
+.launcher .status { flex: none; }
+@media (max-width: 480px) {
+  .launcher-row { flex-wrap: wrap; }
+  .launcher .status { margin-left: calc(44px + var(--s4)); }
+}
+
+/* --- Método de trabajo: tres pasos con filete ---------------------------- */
+.method { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s6); }
+@media (min-width: 860px) { .method { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s7); } }
+.method li { border-top: 2px solid var(--ink); padding-top: var(--s4); }
+.method .flow-num { display: block; margin-bottom: var(--s3); }
+.method h3 { font-weight: 660; margin-bottom: var(--s2); }
+.method p { font-size: var(--fs-sm); color: var(--ink-muted); line-height: 1.65; }
+
+/* El hero de la marca paraguas tiene un titular más largo. */
+.hero h1 { max-width: 17ch; }
 
 /* ==========================================================================
    7. MOVIMIENTO REDUCIDO

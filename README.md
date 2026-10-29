@@ -1,6 +1,7 @@
 # ValkiriaCloud Web
 
-Sitio web público de ValkiriaCloud.
+Sitio web público de ValkiriaCloud, la marca paraguas de las aplicaciones de Valkiria
+Technology. Hoy hay una aplicación disponible: la Plataforma ISP.
 
 ## Dominios
 
@@ -29,7 +30,9 @@ build step, package manager ni dependencias externas: se sirve tal cual.
 Estructura del sitio:
 
 ```
-index.html
+index.html                (marca paraguas)
+aplicaciones/index.html   (hub: destino de «Ingresar»)
+isp/index.html            (Plataforma ISP)
 privacidad/index.html
 terminos/index.html
 eliminacion-datos/index.html
@@ -47,7 +50,7 @@ Raíz productiva:
 
 /var/www/valkiria/
 
-Al desplegar se copian `index.html`, `assets/`, `privacidad/`, `terminos/` y
+Al desplegar se copian `index.html`, `assets/`, `aplicaciones/`, `isp/`, `privacidad/`, `terminos/` y
 `eliminacion-datos/`. No se copian `.git`, `docs`, `integrations`, `README.md` ni
 `CLAUDE.md`. El procedimiento completo está en `docs/OPERATIONS.md`.
 
