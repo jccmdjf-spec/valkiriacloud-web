@@ -4,10 +4,14 @@ Sitio web público de ValkiriaCloud.
 
 ## Dominios
 
-- http://valkiriacloud.com
-- http://www.valkiriacloud.com
+- https://valkiriacloud.com
+- https://www.valkiriacloud.com
 
-HTTPS está pendiente de corrección porque el certificado actual no coincide con www.valkiriacloud.com.
+HTTP redirige (301) a HTTPS. Plataforma: https://isp.valkiriacloud.com.
+
+La forma de trabajar (autoridad, QA, despliegue, qué puede hacer un agente sin
+preguntar) está en [`docs/OPERATIONS.md`](docs/OPERATIONS.md); `CLAUDE.md` es su
+resumen para agentes.
 
 ## Producción
 
@@ -26,19 +30,26 @@ Estructura del sitio:
 
 ```
 index.html
+privacidad/index.html
+terminos/index.html
+eliminacion-datos/index.html
 assets/
   css/site.css
   js/site.js
+  js/privacy-request.js
   img/favicon.svg
   img/valkiria-isotipo.svg
+integrations/google-apps-script/privacy-requests/   (no se publica)
+docs/                                               (no se publica)
 ```
 
 Raíz productiva:
 
 /var/www/valkiria/
 
-Al desplegar hay que copiar `index.html` **y** el directorio `assets/`; el
-HTML referencia las hojas de estilo y el script por ruta relativa.
+Al desplegar se copian `index.html`, `assets/`, `privacidad/`, `terminos/` y
+`eliminacion-datos/`. No se copian `.git`, `docs`, `integrations`, `README.md` ni
+`CLAUDE.md`. El procedimiento completo está en `docs/OPERATIONS.md`.
 
 ## Contenido y claims
 
@@ -63,7 +74,7 @@ El directorio /var/www/valkiria no se utiliza como repositorio Git.
 
 ## Flujo objetivo
 
-Local / Claude / Codex -> GitHub -> servidor -> /var/www/valkiria
+Local / Claude / Codex -> GitHub/main -> servidor (`git pull --ff-only`) -> /var/www/valkiria
 
 ## Seguridad
 
