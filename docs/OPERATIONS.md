@@ -77,8 +77,9 @@ git log -5 --oneline --decorate
 
 ## 2. Checklist de auditoría
 
-- **Marca:** VALKIRIA TECHNOLOGY · ValkiriaCloud · Plataforma ISP SaaS. No usar
-  UltraNet ISP, `ultranet-isp-v3` ni NetControl como marca pública (aparecen solo
+- **Marca:** VALKIRIA TECHNOLOGY · ValkiriaCloud (marca paraguas de aplicaciones; la
+  Plataforma ISP es la primera). Desde TASK-20261029-001 ya no se define como «Plataforma
+  ISP SaaS». No usar UltraNet ISP, `ultranet-isp-v3` ni NetControl como marca pública (aparecen solo
   en README y `PRODUCT_SOURCE_MAP.md` como fuente funcional).
 - **Dirección visual:** Enterprise, 80 % blanco/neutros · 15 % navy · 5 % ámbar.
   Sin dark full-page, gradientes, glow, glassmorphism, iconos gigantes ni cards por
@@ -89,6 +90,8 @@ git log -5 --oneline --decorate
   - WhatsApp `https://wa.me/573334012896`
   - Instagram `https://www.instagram.com/valkiriacloud/`
   - Facebook `https://www.facebook.com/valkiriacloud`
+- **Estructura:** `/` (marca paraguas), `/aplicaciones/` (hub; destino de «Ingresar»), `/isp/`
+  (Plataforma ISP). Una página por aplicación, con tarjeta en hub y Home.
 - **Legales:** `/privacidad/`, `/terminos/`, `/eliminacion-datos/` responden 200 y
   tienen branding, footer, canonical, title, description y robots.
 - **SEO:** title, description, canonical, Open Graph, Twitter, robots, favicon y
@@ -127,7 +130,7 @@ errores, enlaces rotos, assets 404. Al terminar, restablecer el viewport
 ## 3. Verificación de producción (solo lectura)
 
 ```bash
-for u in "/" "/privacidad/" "/terminos/" "/eliminacion-datos/"; do
+for u in "/" "/aplicaciones/" "/isp/" "/privacidad/" "/terminos/" "/eliminacion-datos/"; do
   curl -sS -o /dev/null -w "$u = %{http_code}\n" "https://valkiriacloud.com$u"
 done
 curl -sS -o /dev/null -w 'WWW=%{http_code}\n' https://www.valkiriacloud.com/
@@ -183,7 +186,7 @@ git log --oneline HEAD..origin/main
 git log -3 --oneline --decorate
 echo "SERVER_HEAD_SHA=$(git rev-parse HEAD)"
 sudo nginx -t
-for f in index.html privacidad/index.html terminos/index.html eliminacion-datos/index.html assets; do
+for f in index.html aplicaciones/index.html isp/index.html privacidad/index.html terminos/index.html eliminacion-datos/index.html assets; do
   sudo diff -rq "$f" "/var/www/valkiria/$f" && echo "OK $f"
 done
 ```
@@ -206,6 +209,8 @@ git rev-parse HEAD; git rev-parse origin/main                # deben coincidir
 
 sudo cp -a index.html /var/www/valkiria/
 sudo cp -a assets /var/www/valkiria/
+sudo cp -a aplicaciones /var/www/valkiria/
+sudo cp -a isp /var/www/valkiria/
 sudo cp -a privacidad /var/www/valkiria/
 sudo cp -a terminos /var/www/valkiria/
 sudo cp -a eliminacion-datos /var/www/valkiria/
@@ -235,5 +240,10 @@ Cerrar cada tarea con el bloque de variables de la TASK (`LOCAL_SHA_INICIAL`,
   y `www`; `nginx -t` verde; Apps Script activo.
 - Pendiente del propietario: aprobación visual y prueba funcional del formulario con
   cuenta QA (fila en la hoja, correo al equipo, confirmación al solicitante).
+- **Incidente abierto (29-oct-2026):** se eliminó la cuenta `info@valkiriacloud.com`, dueña
+  del Apps Script y de la hoja de solicitudes. El formulario no registra y el buzón de contacto
+  no recibe correo. Plan en `docs/PRIVACY_BACKEND.md` (restaurar usuario en Admin dentro de ~20
+  días, transferir propiedad, luego backend propio con lista de supresión). El `GET` del Web App
+  responde «activo» aunque el envío falle: no usarlo como prueba de salud.
 - Hallazgo menor abierto: `privacy-request.js` no envía `userAgent` y `Code.gs` lo lee
   de `e.parameter.ua`; la columna «User-Agent» de la hoja queda vacía.

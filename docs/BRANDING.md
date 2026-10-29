@@ -217,3 +217,25 @@ efecto.
 La página debe verse profesional **impresa en escala de grises**. Si una sección
 no se siente adecuada, se corrige jerarquía, espaciado, tipografía, proporción o
 composición — nunca añadiendo color, sombra, borde, iconos o tarjetas.
+
+---
+
+# Marca paraguas de aplicaciones — TASK-20261029-001
+
+**Fecha:** 29 de octubre de 2026
+**Estado:** vigente. Sustituye únicamente el **posicionamiento**: ValkiriaCloud deja de
+definirse como «Plataforma ISP SaaS» y pasa a ser la marca que reúne las aplicaciones de
+Valkiria Technology. La dirección visual Enterprise (80/15/5), el isotipo y la paleta
+siguen vigentes sin cambios.
+
+- Descriptor público: **«Aplicaciones prácticas para operar tu negocio»**.
+- La Plataforma ISP es la primera aplicación; su detalle vive en `/isp/` (antes, la Home).
+- «Ingresar» ya no lleva directo a `isp.valkiriacloud.com`: lleva a `/aplicaciones/`.
+- Una tarjeta de aplicación (`.app`) es un objeto discreto y se admite en el sistema; el
+  resto de reglas contra tarjetas decorativas sigue en pie. Ámbar solo como filete superior.
+- Textos que son **intención del propietario**, no hechos verificados en código: que se
+  irán sumando aplicaciones para otras áreas y la sección «Cómo trabajamos». Revisarlos
+  antes de publicar.
+- Pendiente de revisión legal: se cambió la fila «Producto» de `/privacidad/` y
+  `/terminos/` («aplicaciones de Valkiria Technology (hoy, la Plataforma ISP)»). El texto
+  jurídico restante sigue hablando del producto ISP.
